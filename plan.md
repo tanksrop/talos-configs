@@ -6,9 +6,9 @@ k8s cluster creation workflow?:
 * add secrets with credentials needed to access bitwarden secrets
 * bootstrap argocd with helm and git repo and user already populated
 
-talos-configs/
-├── machines/          # Talos machine configuration files (controlplane.yaml, worker.yaml, etc.)
-├── bootstrap/         # Scripts or configs for initial cluster bootstrap
-├── manifests/         # Kubernetes manifests (deployments, services, PVs, PVCs, ingress)
-├── docs/              # Markdown docs (networking.md, ingress-migration.md, storage.md, etc.)
-├── README.md
+talos-configs/  
+├── machines/          # Talos machine configuration files (possibly not due to security risks)  
+├── bootstrap/         # Scripts or configs for initial cluster bootstrap, automate future rebuilds  
+├── manifests/         # Kubernetes manifests (argocd will point here)  
+├── docs/              # Markdown docs (troubleshooting/maintainance and other info i might find useful in the future)  
+├── README.md  
