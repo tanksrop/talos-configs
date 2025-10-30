@@ -86,3 +86,49 @@ helm install \
     --set=gatewayAPI.enabled=true \
     --set=gatewayAPI.enableAlpn=true \
     --set=gatewayAPI.enableAppProtocol=true
+
+
+below is a working gatewayapi route to homer:
+
+ip-pool.yaml
+ben in ~/Documents/talos/test λ cat ippool.yaml 
+apiVersion: cilium.io/v2alpha1
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: vip-pool
+spec:
+  blocks:
+  - cidr: "192.168.0.240/32"
+
+gateway.yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: homer-gateway
+  namespace: default
+spec:
+  gatewayClassName: cilium
+  listeners:
+  - name: http
+    protocol: HTTP
+    port: 80
+    allowedRoutes:
+      namespaces:
+        from: Same
+
+httproute.yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: homer-route
+  namespace: default
+spec:
+  parentRefs:
+  - name: homer-gateway
+    namespace: default
+  hostnames:
+  - "test.internal"
+  rules:
+  - backendRefs:
+    - name: homer
+      port: 80
