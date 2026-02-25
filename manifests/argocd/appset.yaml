@@ -15,7 +15,7 @@ spec:
           - path: manifests/*/*
   template:
     metadata:
-      name: '{{.path.basename}}'
+      name: '{{index .path.segments 1}}-{{.path.basename}}'
     spec:
       project: default
       source:
