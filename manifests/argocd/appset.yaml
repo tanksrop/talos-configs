@@ -19,7 +19,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/tanksrop/kubernetes-configs.git
+        repoURL: https://github.com/tanksrop/talos-configs.git
         path: '{{.path.path}}'
         targetRevision: HEAD
       destination:
